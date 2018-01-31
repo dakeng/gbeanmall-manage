@@ -31,7 +31,7 @@ export default class Admin extends React.Component{
                             <Route path={`${url}/commodity`} component={CommodityList} />
                         </Switch>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>Footer</Footer>
+                    <Footer style={{ textAlign: 'center' }}>游戏金豆兑换平台 by Dakeng</Footer>
                 </Layout>
             </Layout>
         );
