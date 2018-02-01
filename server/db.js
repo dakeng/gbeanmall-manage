@@ -12,4 +12,4 @@ db.once('open', function callback(){
 
 mongoose.connect('mongodb://localhost:27017/gbeanmall');
 
-module.exports = mongoose;
+export default mongoose;

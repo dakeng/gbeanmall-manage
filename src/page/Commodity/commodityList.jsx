@@ -1,8 +1,12 @@
+import './styles/index.css';
 import React from 'react';
 import Table from 'antd/lib/table';
 import Divider from 'antd/lib/divider';
 import Button from 'antd/lib/button';
+import Icon from 'antd/lib/icon';
 //import { Tabel, Icon, Divider } from 'antd';
+
+import AddCommodity from './AddCommodity';
 
 const dataSource = [
     {
@@ -47,9 +51,9 @@ const columns = [
         render: (text, record) => {
             return (
                 <span>
-                    <Button size="large" onClick={(e) => {console.log('编辑')}}>编辑</Button>
+                    <Button onClick={(e) => {console.log('编辑')}}>编辑</Button>
                     <Divider type="vertical" />
-                    <Button size="large" onClick={(e) => {console.log('删除')}}>删除</Button>
+                    <Button onClick={(e) => {console.log('删除')}}>删除</Button>
                 </span>
             );
         }
@@ -57,15 +61,28 @@ const columns = [
 ];
 
 export default class CommodityList extends React.Component {
+    //下班回去写
+    add(){
+
+    }
+
     render (){
         return (
             <div className="content-container">
                 <h2>商品管理</h2>
+                <Divider />
+                <div className="btn-container">
+                    <Button onClick={(e) => {console.log('编辑')}}><Icon type="search" />查询</Button>
+                    <Divider type="vertical" />
+                    <Button onClick={(e) => {this.add()}}><Icon type="plus" />新增</Button>
+                </div>
+                <Divider/>
                 <Table 
                     columns={columns}
                     dataSource={dataSource}
                     pagination={false}
                 />
+                <AddCommodity />
             </div>
         );
     }

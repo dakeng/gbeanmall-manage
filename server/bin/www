@@ -4,15 +4,15 @@
  * Module dependencies.
  */
 
-var app = require('../server');
-var debug = require('debug')('gbeanmall-management:server');
+var app = require('../app');
+var debug = require('debug')('server:server');
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '4001');
+var port = normalizePort(process.env.PORT || '4000');
 app.set('port', port);
 
 /**

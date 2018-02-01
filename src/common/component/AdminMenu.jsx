@@ -29,7 +29,7 @@ export default class AdminMenu extends React.Component{
                     {
                         menus.map((item, index) => {
                             return (
-                                <Menu.Item key={item.url} style={{fontSize: '16px'}}>
+                                <Menu.Item key={item.url}>
                                     <Icon type={item.iconType} />
                                     <span>{item.name}</span>
                                 </Menu.Item>

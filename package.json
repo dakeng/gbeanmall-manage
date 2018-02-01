@@ -6,24 +6,27 @@
     "antd": "^3.1.4",
     "art-template": "^4.12.2",
     "babel-cli": "^6.26.0",
-    "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.16.2",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
     "express-art-template": "^1.0.0",
-    "mongoose": "^5.0.1",
-    "morgan": "^1.9.0",
+    "mongoose": "^5.0.2",
+    "morgan": "~1.9.0",
     "react": "^16.2.0",
     "react-app-rewired": "^1.4.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
-    "serve-favicon": "^2.4.5"
+    "serve-favicon": "~2.4.5",
+    "signals": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "babel-node ./server/bin/www"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.6.3",
