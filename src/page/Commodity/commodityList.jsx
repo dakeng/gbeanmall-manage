@@ -7,6 +7,7 @@ import Icon from 'antd/lib/icon';
 //import { Tabel, Icon, Divider } from 'antd';
 
 import AddCommodity from './AddCommodity';
+import ModalSignals from './modules/modal-signals';
 
 const dataSource = [
     {
@@ -63,7 +64,7 @@ const columns = [
 export default class CommodityList extends React.Component {
     //下班回去写
     add(){
-
+        ModalSignals.showAddCommodity.dispatch(true);
     }
 
     render (){

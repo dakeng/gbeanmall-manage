@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from 'antd/lib/form';
 import Input from 'antd/lib/input';
-import Select from 'antd/lib/select';
+//import Select from 'antd/lib/select';
 const FormItem = Form.Item;
 
 export default class CommodityForm extends React.Component {
@@ -13,6 +13,9 @@ export default class CommodityForm extends React.Component {
                 </FormItem>
                 <FormItem label="商品价格">
                     <Input placeholder="price"/>
+                </FormItem>
+                <FormItem label="商品规格">
+                    <Input placeholder="specification"/>
                 </FormItem>
             </Form>
         );

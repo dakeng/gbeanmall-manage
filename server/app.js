@@ -6,8 +6,11 @@ import cookieParser from 'cookie-parser';
 import bodyParser from  'body-parser';
 import './db';
 
+var cors = require('cors');
+
 let index = require('./routes/index');
 let users = require('./routes/users');
+let commodity = require('./routes/api/commodity');
 
 let app = express();
 
@@ -26,8 +29,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//跨域请求处理
+app.options('*', cors());
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/commodity', commodity);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,3 +55,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+//这代码写的我都想掐死自己辣鸡
