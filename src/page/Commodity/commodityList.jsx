@@ -64,7 +64,11 @@ const columns = [
 export default class CommodityList extends React.Component {
     //下班回去写
     add(){
-        ModalSignals.showAddCommodity.dispatch(true);
+        ModalSignals.showAddCommodity.dispatch({visible: true});
+    }
+
+    componentDidMount(){
+        
     }
 
     render (){

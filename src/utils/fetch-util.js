@@ -12,15 +12,23 @@ export default class FetchUtil {
 
     exec(){
         const _method = this.config.method.toUpperCase();
-        if(_method === "POST"){
-            const init = {
-                method: _method,
-                body: this.config.body,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
+        let init = {
+            method: _method,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
+        }
+        if(_method === "POST"){
+            Object.assign(init, {body: this.config.body});
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    reject('请求超时');
+                }, this.config.timeout);
+                fetch(this.config.url, init).then(resolve, reject);
+            });
+        }
+        if(_method === "GET"){
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     reject('请求超时');

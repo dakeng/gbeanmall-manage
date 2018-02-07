@@ -7,7 +7,7 @@
 - Express + MongoDB (Mongoose)
 
 - [ ] 解决antd按需加载找不到模块的问题
+- [ ] 表单弹窗关闭时取消请求
+- [ ] 熟悉promise和fetch
 
-      ​
-
-      ​
+  ​

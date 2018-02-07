@@ -5,71 +5,47 @@ import Modal from 'antd/lib/modal';
 
 import modalSignals from './modules/modal-signals';
 import CommodityForm from './CommodityForm';
-//import fetch from './../../config/fetch';
+import requestAddCommodity from './modules/request-add-commodity';
 
 export default class AddCommodity extends React.Component {
 
     state = {
-        ModalText: 'Content of the modal',
+        ModalText: '请输入',
         visible: false,
         confirmLoading: false,
     }
 
     showModal = (config) => {
-        this.setState(config);
+        this.setState(()=>{return config});
     }
 
     handleOk = () => {
         this.setState({
-            ModalText: 'The modal will be closed after two seconds',
+            ModalText: '录入中...',
             confirmLoading: true,
         });
-        /* setTimeout(() => {
-        this.setState({
-            visible: false,
-            confirmLoading: false,
-        });
-        }, 2000); */
         let data = {
-            commodityName: 'ceshi',
-            commodityPrice: '50',
-            commoditySpecification: '22'
+            commodityName: this.CommodityForm.state.name,
+            commodityPrice: this.CommodityForm.state.price,
+            commoditySpecification: this.CommodityForm.state.specification,
         }
-        data = JSON.stringify(data);
-        console.log(data);
-        let init = {
-            method: "POST",
-            body: data,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }
-        fetch('/commodity', init)
-            .then(res => res.text())
-            .then(
-                result => {
-                    this.setState({
-                        visible: false,
-                        confirmLoading: false,
-                    });
-                    console.log(result);
-                },
-                error => {
-                    this.setState({
-                        confirmLoading: false,
-                        ModalText: 'failed'
-                    });
-                    console.log(error);
-                }
-            )
+        requestAddCommodity(data, this.clearForm);
     }
 
     handleCancel = () => {
-        console.log('Clicked cancel button');
+        //console.log('Clicked cancel button');
         this.setState({
             visible: false,
         });
+        this.clearForm();
+    }
+
+    clearForm = () => {
+        this.CommodityForm.setState({
+            name: null,
+            price: null,
+            specification: null,
+        })
     }
 
     componentDidMount() {
@@ -87,7 +63,7 @@ export default class AddCommodity extends React.Component {
                 style={{textAlign: 'center'}}
             >
             <p>{ModalText}</p>
-            <CommodityForm />
+            <CommodityForm ref={ref => this.CommodityForm = ref}/>
             </Modal>
         );
     }
