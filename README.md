@@ -12,11 +12,15 @@
 - [ ] 表单弹窗关闭时取消请求
 - [ ] 熟悉promise和fetch
 
-  ​
 ## 运行项目
 
-``` git clone https://github.com/dakeng/gbeanmall-manage.git ```
-``` npm install ```
-``` npm start ```
-``` http://localhost:3000/admin ```
-      ​
+``` 
+git clone https://github.com/dakeng/gbeanmall-manage.git
+npm install
+npm start
+npm run server
+```
+浏览器打开
+```
+http://localhost:3000/admin
+```
