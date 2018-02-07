@@ -12,6 +12,11 @@
 - [ ] 表单弹窗关闭时取消请求
 - [ ] 熟悉promise和fetch
 
+## 依赖
+
+需要先下载[MongoDB](https://www.mongodb.com/download-center?jmp=nav#community)，并启用<br>
+可以下载MongoDB Compass便于数据库可视化编辑
+
 ## 运行项目
 
 ``` 
