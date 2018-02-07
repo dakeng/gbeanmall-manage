@@ -7,7 +7,7 @@ let router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     console.log('获取商品列表');
-    commodityControler.find(rep, res, next);
+    commodityControler.find(req, res, next);
 });
 
 router.post('/', function(req, res, next){

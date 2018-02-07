@@ -20,16 +20,30 @@ export default class AddCommodity extends React.Component {
     }
 
     handleOk = () => {
-        this.setState({
-            ModalText: '录入中...',
-            confirmLoading: true,
-        });
         let data = {
             commodityName: this.CommodityForm.state.name,
             commodityPrice: this.CommodityForm.state.price,
             commoditySpecification: this.CommodityForm.state.specification,
         }
-        requestAddCommodity(data, this.clearForm);
+        if(!data.commodityName){
+            this.setState({
+                ModalText: '商品名称不能为空',
+            });
+        }else if(!data.commodityPrice){
+            this.setState({
+                ModalText: '商品价格不能为空',
+            });
+        }else if(!data.commoditySpecification){
+            this.setState({
+                ModalText: '商品规格不能为空',
+            });
+        }else{
+            this.setState({
+                ModalText: '录入中...',
+                confirmLoading: true,
+            });
+            requestAddCommodity(data, this.clearForm);
+        }
     }
 
     handleCancel = () => {

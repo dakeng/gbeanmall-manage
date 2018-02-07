@@ -8,28 +8,13 @@ import Icon from 'antd/lib/icon';
 
 import AddCommodity from './AddCommodity';
 import ModalSignals from './modules/modal-signals';
-
-const dataSource = [
-    {
-        key: '1',
-        goodId: '1',
-        goodName: 'dakeng',
-        goodImg: '',
-        price: '10000',
-        specification: '1'
-    },
-];
+import requestCommodityList from './modules/request-commodity-list';
 
 const columns = [
     {
-        title: '货物id',
-        dataIndex: 'goodId',
-        key: 'goodId'
-    },
-    {
         title: '货物名称',
-        dataIndex: 'goodName',
-        key: 'goodName'
+        dataIndex: 'commodity_name',
+        key: 'name'
     },
     {
         title: '货物图片',
@@ -38,12 +23,12 @@ const columns = [
     },
     {
         title: '单价',
-        dataIndex: 'price',
+        dataIndex: 'commodity_price',
         key: 'price'
     },
     {
         title: '规格',
-        dataIndex: 'specification',
+        dataIndex: 'commodity_specification',
         key: 'specification'
     },
     {
@@ -62,16 +47,32 @@ const columns = [
 ];
 
 export default class CommodityList extends React.Component {
-    //下班回去写
+    constructor(props){
+        super(props);
+        this.state = {
+            dataSource: [],
+        }
+    }
+    
     add(){
-        ModalSignals.showAddCommodity.dispatch({visible: true});
+        ModalSignals.showAddCommodity.dispatch({
+            visible: true,
+            ModalText: '请输入'
+        });
     }
 
-    componentDidMount(){
-        
+    changeList = (data) => {
+        this.setState({
+            dataSource: data,
+        })
+    }
+
+    componentWillMount(){
+        requestCommodityList({}, this.changeList);
     }
 
     render (){
+        //console.log(this.state.dataSource);
         return (
             <div className="content-container">
                 <h2>商品管理</h2>
@@ -84,7 +85,7 @@ export default class CommodityList extends React.Component {
                 <Divider/>
                 <Table 
                     columns={columns}
-                    dataSource={dataSource}
+                    dataSource={this.state.dataSource}
                     pagination={false}
                 />
                 <AddCommodity />

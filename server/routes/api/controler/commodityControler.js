@@ -13,7 +13,7 @@ const commodityControler = {
         });
     },
     find(rep, res, next){
-        Commodity.find(rep.body, (err, commoditys) => {
+        Commodity.find({}, (err, commoditys) => {
             if(err){
                 res.send(err);
             }else{

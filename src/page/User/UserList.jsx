@@ -60,9 +60,9 @@ const columns = [
         render: (text, record) => {
             return (
                 <span>
-                    <Button size="large" onClick={(e) => {console.log('查看订单')}}>查看订单</Button>
+                    <Button onClick={(e) => {console.log('查看订单')}}>查看订单</Button>
                     <Divider type="vertical" />
-                    <Button size="large" onClick={(e) => {console.log('已完成任务')}}>已完成任务</Button>
+                    <Button onClick={(e) => {console.log('已完成任务')}}>已完成任务</Button>
                 </span>
             );
         }

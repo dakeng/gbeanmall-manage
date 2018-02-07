@@ -22,21 +22,22 @@ let requestAddCommodity = function(data, callback){
         .then(response => {
             if(response.status >= 400){
                 throw new Error('Bad response from server');
-            }
-            response.json().then(data => {
-                console.log(data);
-                modalSignals.showAddCommodity.dispatch({
-                    visible: true, 
-                    confirmLoading: false, 
-                    ModalText: '录入成功'
-                });
-                callback();
-                setTimeout(function(){
+            }else{
+                response.json().then(data => {
+                    console.log(data);
                     modalSignals.showAddCommodity.dispatch({
-                        visible: false
-                    })
-                }, 2000)
-            })
+                        visible: true, 
+                        confirmLoading: false, 
+                        ModalText: '录入成功'
+                    });
+                    callback();
+                    setTimeout(function(){
+                        modalSignals.showAddCommodity.dispatch({
+                            visible: false
+                        })
+                    }, 2000)
+                })
+            }
         }).catch(err => {
             modalSignals.showAddCommodity.dispatch({
                 visible: true, 
