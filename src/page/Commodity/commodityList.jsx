@@ -54,11 +54,15 @@ export default class CommodityList extends React.Component {
         }
     }
     
-    add(){
+    add = () => {
         ModalSignals.showAddCommodity.dispatch({
             visible: true,
             ModalText: '请输入'
         });
+    }
+
+    delete = () => {
+        
     }
 
     changeList = (data) => {

@@ -21,8 +21,33 @@ POST /commodity
 ```
 ```
 {
-    commodity_name: '商品名称',
-    commodity_price: '商品价格',
-    commodity_specification: '商品规格',
+    operate: 1,
+    data: {
+        commodity_name: '商品名称',
+        commodity_price: '商品价格',
+        commodity_specification: '商品规格'
+    }
+}
+```
+## 删除商品
+```
+POST /commodity
+```
+```
+{
+    operate: 2,
+    data: {
+        id: '12'    //商品id
+    }
+}
+```
+## 查找商品
+```
+{
+    operate: 3,
+    data: {
+        findByName: 'name',
+        findByPrice: '>12'  //'<' or '>' or '=' + number
+    }
 }
 ```

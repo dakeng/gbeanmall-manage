@@ -1,8 +1,11 @@
 import Commodity from './../../../model/commodity';
 
+//Todo
+//传入的参数判断
+
 const commodityControler = {
-    create(rep, res, next){
-        Commodity.create(rep.body, err => {
+    create(req, res, next){
+        Commodity.create(req.body.data, err => {
             if(err){
                 console.log(err);
                 return next(err);
@@ -12,7 +15,20 @@ const commodityControler = {
             }
         });
     },
-    find(rep, res, next){
+    del(req, res, next){
+        Commodity.find().remove(req.body.data, err => {
+            if(err){
+                console.log(err);
+                return next(err);
+            }else{
+                res.json(this.generateResData({msg: '已删除'}));
+            }
+        })
+    },
+    search(req, res, next){
+
+    },
+    find(req, res, next){
         Commodity.find({}, (err, commoditys) => {
             if(err){
                 res.send(err);
@@ -21,9 +37,9 @@ const commodityControler = {
             }
         });
     },
-    generateResData(data){
+    generateResData(data, status = 1){
         let resData = {};
-        resData.status = 1;
+        resData.status = status;
         resData.data = data;
         return resData;
     }
