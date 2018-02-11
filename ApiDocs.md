@@ -36,9 +36,7 @@ POST /commodity
 ```
 {
     operate: 2,
-    data: {
-        id: '12'    //商品id
-    }
+    _id: '' //商品id
 }
 ```
 ## 查找商品
@@ -48,6 +46,19 @@ POST /commodity
     data: {
         findByName: 'name',
         findByPrice: '>12'  //'<' or '>' or '=' + number
+    }
+}
+```
+## 修改商品信息
+```
+{
+    operate: 4,
+    _id: '12313546',    //商品id
+    data: {
+        //要修改的内容
+        //commodity_name
+        //commodity_price
+        //commodity_specification
     }
 }
 ```

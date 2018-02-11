@@ -2,21 +2,23 @@ import FetchUtil from './../../../utils/fetch-util';
 
 import modalSignals from './modal-signals';
 
-let requestAddCommodity = function(data, callback){
+let requestModifyCommodity = function(data, callback){
     let postData = {};
-    postData.operate = 1;
+    postData.operate = 4;
+    postData._id = data.id;
     postData.data = {
         commodity_name: data.commodityName,
         commodity_price: data.commodityPrice,
         commodity_specification: data.commoditySpecification
     }
+    console.log(postData);
     postData = JSON.stringify(postData);
     let config = {
         url: '/commodity',
         body: postData,
     };
 
-    modalSignals.showAddCommodity.dispatch({
+    modalSignals.showModifyModal.dispatch({
         visible: true, 
         confirmLoading: true
     });
@@ -28,17 +30,21 @@ let requestAddCommodity = function(data, callback){
             }else{
                 response.json().then(data => {
                     console.log(data);
-                    modalSignals.showAddCommodity.dispatch({
-                        visible: true, 
-                        confirmLoading: false, 
-                        ModalText: '录入成功'
-                    });
-                    callback();
-                    setTimeout(function(){
-                        modalSignals.showAddCommodity.dispatch({
-                            visible: false
-                        })
-                    }, 2000)
+                    if(data.status == 1){
+                        modalSignals.showModifyModal.dispatch({
+                            visible: true, 
+                            confirmLoading: false, 
+                            ModalText: '修改成功'
+                        });
+                        callback();
+                    }else{
+                        let text = data.msg || data.data.name;
+                        modalSignals.showModifyModal.dispatch({
+                            visible: true, 
+                            confirmLoading: false, 
+                            ModalText: text
+                        });
+                    }
                 })
             }
         }).catch(err => {
@@ -51,4 +57,4 @@ let requestAddCommodity = function(data, callback){
         })
 }
 
-export default requestAddCommodity;
+export default requestModifyCommodity;

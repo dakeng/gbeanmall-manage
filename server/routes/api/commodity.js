@@ -23,6 +23,9 @@ router.post('/', function(req, res, next){
         case 3:
             commodityControler.search(req, res, next);
         break;
+        case 4:
+            commodityControler.modify(req, res, next);
+        break;
         default:
             res.json(commodityControler.generateResData({msg: 'operate不正确'}, 0));
         break;

@@ -7,10 +7,18 @@ import Icon from 'antd/lib/icon';
 //import { Tabel, Icon, Divider } from 'antd';
 
 import AddCommodity from './AddCommodity';
+import ModityCommodity from './ModifyCommodity';
 import ModalSignals from './modules/modal-signals';
 import requestCommodityList from './modules/request-commodity-list';
+import requestDeleteCommodity from './modules/request-delete-commodity';
 
+const Column = Table;
 const columns = [
+    {
+        title: 'id',
+        dataIndex: '_id',
+        key: 'id'
+    },
     {
         title: '货物名称',
         dataIndex: 'commodity_name',
@@ -31,7 +39,7 @@ const columns = [
         dataIndex: 'commodity_specification',
         key: 'specification'
     },
-    {
+    /* {
         title: 'Action',
         key: 'action',
         render: (text, record) => {
@@ -39,11 +47,11 @@ const columns = [
                 <span>
                     <Button onClick={(e) => {console.log('编辑')}}>编辑</Button>
                     <Divider type="vertical" />
-                    <Button onClick={(e) => {console.log('删除')}}>删除</Button>
+                    <Button onClick={(e) => this.delete(record._id)}>删除</Button>
                 </span>
             );
         }
-    }
+    } */
 ];
 
 export default class CommodityList extends React.Component {
@@ -61,18 +69,34 @@ export default class CommodityList extends React.Component {
         });
     }
 
-    delete = () => {
-        
+    delete = (id) => {
+        requestDeleteCommodity({_id: id}, this.loadData);
+    }
+
+    modify = (data) => {
+        let config = {
+            visible: true
+        };
+        Object.assign(config, data);
+        ModalSignals.showModifyModal.dispatch(config);
     }
 
     changeList = (data) => {
         this.setState({
             dataSource: data,
+            loading: false,
         })
     }
 
-    componentWillMount(){
+    loadData = () => {
+        this.setState({
+            loading: true
+        })
         requestCommodityList({}, this.changeList);
+    }
+
+    componentDidMount(){
+        this.loadData();
     }
 
     render (){
@@ -88,11 +112,44 @@ export default class CommodityList extends React.Component {
                 </div>
                 <Divider/>
                 <Table 
-                    columns={columns}
+                    rowKey={record => record._id}
                     dataSource={this.state.dataSource}
                     pagination={false}
-                />
-                <AddCommodity />
+                    loading={this.state.loading}
+                >
+                    {
+                        columns && columns.map((item, index) => {
+                            return (
+                                <Column
+                                    title={item.title}
+                                    key={item.key}
+                                    dataIndex={item.dataIndex}
+                                />
+                            );
+                        })
+                    }
+                    <Column
+                        title="Action"
+                        key="action"
+                        render={(text, record) => (
+                            <span>
+                                <Button 
+                                    onClick={(e) => {this.modify({
+                                        id: record._id,
+                                        name: record.commodity_name,
+                                        price: record.commodity_price,
+                                        specification: record.commodity_specification,
+                                    })}}>
+                                    编辑
+                                </Button>
+                                <Divider type="vertical" />
+                                <Button onClick={(e) => this.delete(record._id)}>删除</Button>
+                            </span>
+                        )}
+                    />
+                </Table>
+                <AddCommodity loadData={this.loadData}/>
+                <ModityCommodity loadData={this.loadData}/>
             </div>
         );
     }

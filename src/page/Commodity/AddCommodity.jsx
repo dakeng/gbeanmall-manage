@@ -21,9 +21,9 @@ export default class AddCommodity extends React.Component {
 
     handleOk = () => {
         let data = {
-            commodityName: this.CommodityForm.state.name,
-            commodityPrice: this.CommodityForm.state.price,
-            commoditySpecification: this.CommodityForm.state.specification,
+            commodityName: this.state.name,
+            commodityPrice: this.state.price,
+            commoditySpecification: this.state.specification,
         }
         if(!data.commodityName){
             this.setState({
@@ -60,6 +60,7 @@ export default class AddCommodity extends React.Component {
             price: null,
             specification: null,
         })
+        this.props.loadData();
     }
 
     componentDidMount() {
