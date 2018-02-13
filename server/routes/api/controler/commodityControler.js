@@ -19,7 +19,7 @@ const commodityControler = {
         if(!req.body._id){
             res.json(this.generateResData({msg: '缺少参数_id'}, 0));
         }else{
-            Commodity.find().remove(req.body._id, (err, docs) => {
+            Commodity.find().remove({_id: req.body._id}, (err, docs) => {
                 if(err){
                     res.json(this.generateResData(err, 0));
                     next(err);

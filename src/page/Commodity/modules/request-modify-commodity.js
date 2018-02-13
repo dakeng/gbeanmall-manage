@@ -30,7 +30,7 @@ let requestModifyCommodity = function(data, callback){
             }else{
                 response.json().then(data => {
                     console.log(data);
-                    if(data.status == 1){
+                    if(data.status === 1){
                         modalSignals.showModifyModal.dispatch({
                             visible: true, 
                             confirmLoading: false, 
@@ -48,7 +48,7 @@ let requestModifyCommodity = function(data, callback){
                 })
             }
         }).catch(err => {
-            modalSignals.showAddCommodity.dispatch({
+            modalSignals.showModifyModal.dispatch({
                 visible: true, 
                 confirmLoading: false, 
                 ModalText: err.msg

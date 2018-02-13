@@ -51,16 +51,16 @@ export default class AddCommodity extends React.Component {
         this.setState({
             visible: false,
         });
-        this.clearForm();
+        this.clearForm(false);
     }
 
-    clearForm = () => {
+    clearForm = (isReload = true) => {
         this.CommodityForm.setState({
             name: null,
             price: null,
             specification: null,
         })
-        this.props.loadData();
+        isReload && this.props.loadData();
     }
 
     componentDidMount() {

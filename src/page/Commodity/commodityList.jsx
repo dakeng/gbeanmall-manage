@@ -70,7 +70,7 @@ export default class CommodityList extends React.Component {
     }
 
     delete = (id) => {
-        requestDeleteCommodity({_id: id}, this.loadData);
+        requestDeleteCommodity(id, this.loadData);
     }
 
     modify = (data) => {

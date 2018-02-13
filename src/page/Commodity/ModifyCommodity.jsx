@@ -7,7 +7,6 @@ import Input from 'antd/lib/input';
 //import Select from 'antd/lib/select';
 
 import modalSignals from './modules/modal-signals';
-import requestAddCommodity from './modules/request-add-commodity';
 import requestModifyCommodity from './modules/request-modify-commodity';
 
 const FormItem = Form.Item;

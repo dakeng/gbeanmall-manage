@@ -1,9 +1,9 @@
 import FetchUtil from './../../../utils/fetch-util';
 
-let requestDeleteCommodity = function(data, callback){
+let requestDeleteCommodity = function(id, callback){
     let postData = {};
     postData.operate = 2;
-    postData.data = data;
+    postData._id = id;
     postData = JSON.stringify(postData);
     let config = {
         url: '/commodity',
@@ -16,8 +16,12 @@ let requestDeleteCommodity = function(data, callback){
                 throw new Error('Bad response from server');
             }else{
                 response.json().then(data => {
-                    //console.log(data);
-                    callback && callback();
+                    console.log(data);
+                    if(data.status === 1){
+                        callback && callback();
+                    }else{
+                        window.alert(data.data.msg);
+                    }
                 })
             }
         }).catch(err => {
