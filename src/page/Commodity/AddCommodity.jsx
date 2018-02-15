@@ -3,6 +3,7 @@ import React from 'react';
 import Modal from 'antd/lib/modal';
 //import Button from 'antd/lib/button';
 
+import utils from './../../utils/utils';
 import modalSignals from './modules/modal-signals';
 import CommodityForm from './CommodityForm';
 import requestAddCommodity from './modules/request-add-commodity';
@@ -21,13 +22,18 @@ export default class AddCommodity extends React.Component {
 
     handleOk = () => {
         let data = {
-            commodityName: this.state.name,
-            commodityPrice: this.state.price,
-            commoditySpecification: this.state.specification,
+            commodityName: this.CommodityForm.state.name,
+            commodityImgs: this.CommodityForm.state.imgs,
+            commodityPrice: this.CommodityForm.state.price,
+            commoditySpecification: this.CommodityForm.state.specification,
         }
         if(!data.commodityName){
             this.setState({
                 ModalText: '商品名称不能为空',
+            });
+        }else if(utils.isNull(data.commodityImgs)){
+            this.setState({
+                ModalText: '商品图片不能为空',
             });
         }else if(!data.commodityPrice){
             this.setState({
@@ -57,6 +63,7 @@ export default class AddCommodity extends React.Component {
     clearForm = (isReload = true) => {
         this.CommodityForm.setState({
             name: null,
+            imgs: null,
             price: null,
             specification: null,
         })

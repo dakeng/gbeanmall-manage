@@ -6,6 +6,8 @@ import Form from 'antd/lib/form';
 import Input from 'antd/lib/input';
 //import Select from 'antd/lib/select';
 
+import utils from './../../utils/utils';
+
 import modalSignals from './modules/modal-signals';
 import requestModifyCommodity from './modules/request-modify-commodity';
 
@@ -42,10 +44,19 @@ export default class ModityCommodity extends React.Component {
         })
     }
 
+    handleChangeImgs = (e, index) => {
+        let _imgs = [];
+        _imgs[index] = e.target.value;
+        this.setState({
+            imgs: _imgs
+        })
+    }
+
     handleOk = () => {
         let data = {
             id: this.state.id,
             commodityName: this.state.name,
+            commodityImgs: this.state.imgs,
             commodityPrice: this.state.price,
             commoditySpecification: this.state.specification,
         }
@@ -100,6 +111,15 @@ export default class ModityCommodity extends React.Component {
                 <FormItem label="商品名称">
                     <Input placeholder="name" value={this.state.name} onChange={e => this.handleChangeName(e)}/>
                 </FormItem>
+                <FormItem label="商品图片">
+                    <Input placeholder="imgs" value={this.state.imgs && this.state.imgs[0]} onChange={e => this.handleChangeImgs(e, 0)}/>
+                </FormItem>
+                {
+                    this.state.imgs && !utils.isNull(this.state.imgs) &&
+                    this.state.imgs.map((item, index) => {
+                        return <img src={item} alt="" key={index} style={{maxWidth: '50%',display: 'block', border: '1px solid #d9d9d9', borderRadius: '4px', margin: '4px auto'}}/>
+                    })
+                }
                 <FormItem label="商品价格">
                     <Input placeholder="price" type="number" value={this.state.price} onChange={e => this.handleChangePrice(e)}/>
                 </FormItem>

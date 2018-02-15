@@ -8,6 +8,7 @@ let requestModifyCommodity = function(data, callback){
     postData._id = data.id;
     postData.data = {
         commodity_name: data.commodityName,
+        commodity_imgs: data.commodityImgs,
         commodity_price: data.commodityPrice,
         commodity_specification: data.commoditySpecification
     }

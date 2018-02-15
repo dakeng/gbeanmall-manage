@@ -7,6 +7,7 @@ let requestAddCommodity = function(data, callback){
     postData.operate = 1;
     postData.data = {
         commodity_name: data.commodityName,
+        commodity_imgs: data.commodityImgs,
         commodity_price: data.commodityPrice,
         commodity_specification: data.commoditySpecification
     }

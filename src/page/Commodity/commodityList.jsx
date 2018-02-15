@@ -24,11 +24,11 @@ const columns = [
         dataIndex: 'commodity_name',
         key: 'name'
     },
-    {
+    /* {
         title: '货物图片',
-        dataIndex: 'goodImg',
-        key: 'goodImg'
-    },
+        dataIndex: 'commodity_imgs[0]',
+        key: 'imgs'
+    }, */
     {
         title: '单价',
         dataIndex: 'commodity_price',
@@ -119,6 +119,7 @@ export default class CommodityList extends React.Component {
                 >
                     {
                         columns && columns.map((item, index) => {
+                            console.log(item);
                             return (
                                 <Column
                                     title={item.title}
@@ -129,6 +130,13 @@ export default class CommodityList extends React.Component {
                         })
                     }
                     <Column
+                        title="商品图片"
+                        key="goodImgs"
+                        render={(text,record) => (
+                            <img src={record.commodity_imgs} alt="" style={{width: '130px'}}/>
+                        )}
+                    />
+                    <Column
                         title="Action"
                         key="action"
                         render={(text, record) => (
@@ -137,12 +145,15 @@ export default class CommodityList extends React.Component {
                                     onClick={(e) => {this.modify({
                                         id: record._id,
                                         name: record.commodity_name,
+                                        imgs: record.commodity_imgs,
                                         price: record.commodity_price,
                                         specification: record.commodity_specification,
                                     })}}>
                                     编辑
                                 </Button>
-                                <Divider type="vertical" />
+                                { 
+                                    //<Divider type="vertical" />
+                                }
                                 <Button onClick={(e) => this.delete(record._id)}>删除</Button>
                             </span>
                         )}
