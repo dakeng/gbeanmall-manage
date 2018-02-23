@@ -39,7 +39,7 @@ POST /commodity
     _id: '' //商品id
 }
 ```
-## 查找商品
+## 查找商品(待办)
 ```
 {
     operate: 3,
@@ -60,5 +60,19 @@ POST /commodity
         //commodity_price
         //commodity_specification
     }
+}
+```
+## 获取任务列表
+```
+GET /task
+```
+## 创建新任务
+```
+POST /task
+{
+    task_id: String,//任务id
+    task_name: String,//任务名称
+    task_reward: Number,//任务奖励
+    task_des: String,//任务描述
 }
 ```

@@ -11,6 +11,7 @@ var cors = require('cors');
 let index = require('./routes/index');
 let users = require('./routes/users');
 let commodity = require('./routes/api/commodity');
+let task = require('./routes/api/task');
 
 let app = express();
 
@@ -35,6 +36,7 @@ app.options('*', cors());
 app.use('/', index);
 app.use('/users', users);
 app.use('/commodity', commodity);
+app.use('/task', task);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
