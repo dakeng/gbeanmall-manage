@@ -152,7 +152,7 @@ export default class CommodityList extends React.Component {
                                     编辑
                                 </Button>
                                 { 
-                                    //<Divider type="vertical" />
+                                    <Divider type="vertical" />
                                 }
                                 <Button onClick={(e) => this.delete(record._id)}>删除</Button>
                             </span>

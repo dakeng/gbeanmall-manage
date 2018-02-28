@@ -3,8 +3,11 @@ import {Switch, Route} from 'react-router-dom';
 import './styles/style.css';
 import AdminMenu from './../../common/component/AdminMenu';
 import AdminIndex from './../../page/AdminIndex/index';
+
 import UserList from './../User/UserList';
 import CommodityList from './../Commodity/commodityList';
+import TaskList from './../Task/TaskList';
+
 import Layout from 'antd/lib/layout';
 
 const {Header, Sider, Content, Footer} = Layout;
@@ -28,6 +31,7 @@ export default class Admin extends React.Component{
                             <Route exact path={url} component={AdminIndex} />
                             <Route path={`${url}/user`} component={UserList} />
                             <Route path={`${url}/commodity`} component={CommodityList} />
+                            <Route path={`${url}/task`} component={TaskList} />
                         </Switch>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>游戏金豆兑换平台 by Dakeng</Footer>
