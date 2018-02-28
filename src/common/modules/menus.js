@@ -20,11 +20,11 @@ const menus = [
         name: '订单列表',
         iconType: 'shopping-cart'
     },
-    {
+    /* {
         url: '/user',
         name: '用户列表',
         iconType: 'user'
-    }
+    } */
 ];
 
 export default menus;

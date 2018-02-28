@@ -10,6 +10,17 @@
 }
 ```
 
+## 登录/注册
+```
+{
+    operate: 1, //0：注册，1：登录
+    user: {
+        username: 'dakeng',
+        password: '1234567890'
+    }
+}
+```
+
 ## 获取商品列表
 ```
 GET /commodity

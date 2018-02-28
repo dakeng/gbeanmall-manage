@@ -4,7 +4,6 @@ import './styles/style.css';
 import AdminMenu from './../../common/component/AdminMenu';
 import AdminIndex from './../../page/AdminIndex/index';
 
-import UserList from './../User/UserList';
 import CommodityList from './../Commodity/commodityList';
 import TaskList from './../Task/TaskList';
 
@@ -29,7 +28,6 @@ export default class Admin extends React.Component{
                     <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
                         <Switch>
                             <Route exact path={url} component={AdminIndex} />
-                            <Route path={`${url}/user`} component={UserList} />
                             <Route path={`${url}/commodity`} component={CommodityList} />
                             <Route path={`${url}/task`} component={TaskList} />
                         </Switch>
