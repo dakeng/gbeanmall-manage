@@ -30,16 +30,11 @@ let requestAddCommodity = function(data, callback){
                 response.json().then(data => {
                     console.log(data);
                     modalSignals.showAddCommodity.dispatch({
-                        visible: true, 
+                        visible: false, 
                         confirmLoading: false, 
                         ModalText: '录入成功'
                     });
                     callback();
-                    setTimeout(function(){
-                        modalSignals.showAddCommodity.dispatch({
-                            visible: false
-                        })
-                    }, 2000)
                 })
             }
         }).catch(err => {

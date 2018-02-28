@@ -9,7 +9,7 @@ import './db';
 var cors = require('cors');
 
 let index = require('./routes/index');
-let users = require('./routes/users');
+let users = require('./routes/api/users');
 let commodity = require('./routes/api/commodity');
 let task = require('./routes/api/task');
 
@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.options('*', cors());
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/user', users);
 app.use('/commodity', commodity);
 app.use('/task', task);
 

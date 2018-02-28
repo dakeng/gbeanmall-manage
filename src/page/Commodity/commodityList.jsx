@@ -119,7 +119,7 @@ export default class CommodityList extends React.Component {
                 >
                     {
                         columns && columns.map((item, index) => {
-                            console.log(item);
+                            //console.log(item);
                             return (
                                 <Column
                                     title={item.title}
