@@ -1,4 +1,4 @@
-import User from './../../../model/User';
+import User from './../../../model/user';
 import { generateResData } from './../../../common/utils';
 import crypto from 'crypto';
 
