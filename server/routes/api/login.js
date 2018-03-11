@@ -1,7 +1,4 @@
-//var express = require('express');
 import express from 'express';
-import crypto from 'crypto';
-//import User from './../../model/user';
 import userControler from './controler/userControler';
 
 let router = express.Router();
@@ -19,9 +16,6 @@ router.post('/', function(req, res, next) {
   }else if(req.body.operate === 0){
     //注册
     userControler.signUp(req, res, next);
-  }else if(req.body.operate === 2){
-    //退出登录
-    userControler.signOut(req, res, next);
   }
 });
 module.exports = router;

@@ -4,21 +4,36 @@ import crypto from 'crypto';
 
 const userControler = {
     signIn(req, res, next){
-        let username = req.body.user.username;
-        let password = req.body.user.password;
+        console.log('Cookie', req.cookies);
+        let user = new User(req.body.user);
+        /* let username = req.body.user.username;
+        let password = req.body.user.password; */
+        //console.log(user);
         let md5 = crypto.createHash("md5");
-        let encryptPassword = md5.update(password).digest("hex");
+        let encryptPassword = md5.update(user.password).digest("hex");
 
-        User.find({name: username}).exec()
+        User.find({username: user.username, password: encryptPassword}).exec()
             .then((result) => {
-                console.log(result);
-                if(result.length > 0){
-                    if(result[0].password === encryptPassword){
-                        res.json(generateResData({msg: "登录成功"}));
-                        return ;
+                console.log('result', result);
+                if(result){
+                    if(req.session.user){
+                        res.json(generateResData({msg: "已登录"}, 0));
+                    }else{
+                        req.session.regenerate(err => {
+                            if(err){
+                                console.log(err);
+                                res.json(generateResData({msg: "登录失败,请重试"}, 0));
+                            }else{
+                                delete user.password;
+                                req.session.user = user;
+                                console.log('登录session:', req,session);
+                                res.json(generateResData({msg: "登录成功"}));
+                            }
+                        });
                     }
+                }else{
+                    res.json(generateResData({msg: "无效的用户名或密码"}, 0));
                 }
-                res.json(generateResData({msg: "无效的用户名或密码"}, 0));
                 return ;
             })
             .catch((err) => {
@@ -28,19 +43,21 @@ const userControler = {
             });
     },
     signUp(req, res, next){
-        let username = req.body.user.username;
-        let password = req.body.user.password;
+        let user = new User(req.body.user);
+        /* let username = req.body.user.username;
+        let password = req.body.user.password; */
+        //console.log(user);
         let md5 = crypto.createHash("md5");
-        let encryptPassword = md5.update(password).digest("hex");
+        let encryptPassword = md5.update(user.password).digest("hex");
 
-        User.find({name: username}).exec()
+        User.find({username: user.username}).exec()
             .then((result) => {
                 console.log(result);
                 if(result.length > 0){
                     res.json(generateResData({msg: "用户名已存在"}, 0));
                     return ;
                 }else{
-                    User.create({name: username, password: encryptPassword})
+                    User.create({username: user.username, password: encryptPassword})
                         .then((result) => {
                             res.json(generateResData({msg: '注册成功'}));
                             return ;
@@ -52,6 +69,21 @@ const userControler = {
                 next(err);
                 return ;
             });
+    },
+    signOut(req, res, next){
+        if(req.session.user){
+            req.session.destroy(err => {
+                if(err){
+                    res.json(generateResData({msg: "登出失败"}, 0))
+                }else{
+                    res.clearCookie('user_session');
+                    res.json(generateResData({msg: "登出成功"}));
+                }
+            })
+        }else{
+            res.json(generateResData({msg: "未登录"}, 0));
+        }
+        return ;
     }
 }
 

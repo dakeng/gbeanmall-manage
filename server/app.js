@@ -4,16 +4,19 @@ import favicom from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from  'body-parser';
-import './db';
+import session from 'express-session';
+import db from './db';
+
+const MongoStore = require('connect-mongo')(session);
 
 var cors = require('cors');
 
-let index = require('./routes/index');
-let users = require('./routes/api/users');
-let commodity = require('./routes/api/commodity');
-let task = require('./routes/api/task');
+const index = require('./routes/index');
+const users = require('./routes/api/users');
+const commodity = require('./routes/api/commodity');
+const task = require('./routes/api/task');
 
-let app = express();
+const app = express();
 
 // view engine setup
 /* app.engine('html', require('express-art-template'));
@@ -30,6 +33,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  name: 'user_session',
+  secret: 'gbeanmall',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 10 * 1000 
+  },
+  store: new MongoStore({mongooseConnection: db})
+}));
+
 //跨域请求处理
 app.options('*', cors());
 
@@ -42,6 +56,7 @@ app.use('/task', task);
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
+  res.send(err);
   next(err);
 });
 
