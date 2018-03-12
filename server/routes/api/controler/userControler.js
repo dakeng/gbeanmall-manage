@@ -12,21 +12,26 @@ const userControler = {
         let md5 = crypto.createHash("md5");
         let encryptPassword = md5.update(user.password).digest("hex");
 
-        User.find({username: user.username, password: encryptPassword}).exec()
+        User.findOne({username: user.username, password: encryptPassword}).exec()
             .then((result) => {
-                console.log('result', result);
+                //console.log('result', result);
                 if(result){
                     if(req.session.user){
-                        res.json(generateResData({msg: "已登录"}, 0));
+                        if(req.session.user.username === result.username){
+                            res.json(generateResData({msg: "已登录"}, 0));
+                        }else{
+                            res.json(generateResData({msg: "请先退出当前登录，再登录其他账号"}, 0));
+                        }
                     }else{
                         req.session.regenerate(err => {
                             if(err){
                                 console.log(err);
                                 res.json(generateResData({msg: "登录失败,请重试"}, 0));
                             }else{
-                                delete user.password;
-                                req.session.user = user;
-                                console.log('登录session:', req,session);
+                                //delete result.password
+                                //这里的delete为什么无法将属性删除？？
+                                req.session.user = result;
+                                //console.log('登录session:', req.session);
                                 res.json(generateResData({msg: "登录成功"}));
                             }
                         });
