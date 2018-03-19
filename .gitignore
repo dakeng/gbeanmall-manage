@@ -4,6 +4,9 @@
 /node_modules
 package-lock.json
 
+#private
+private.key
+
 # testing
 /coverage
 

@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
+/* app.use(session({
   name: 'user_session',
   secret: 'gbeanmall',
   resave: false,
@@ -42,7 +42,7 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000
   },
   store: new MongoStore({mongooseConnection: db})
-}));
+})); */
 
 //跨域请求处理
 app.options('*', cors());

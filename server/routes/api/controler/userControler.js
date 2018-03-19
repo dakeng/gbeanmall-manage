@@ -4,6 +4,7 @@ import crypto from 'crypto';
 
 const userControler = {
     signIn(req, res, next){
+        console.log('1',req.session);
         console.log('Cookie', req.cookies);
         let user = new User(req.body.user);
         /* let username = req.body.user.username;
@@ -16,6 +17,7 @@ const userControler = {
             .then((result) => {
                 //console.log('result', result);
                 if(result){
+                    //console.log('user', req.session.user)
                     if(req.session.user){
                         if(req.session.user.username === result.username){
                             res.json(generateResData({msg: "已登录"}, 0));
@@ -31,7 +33,7 @@ const userControler = {
                                 //delete result.password
                                 //这里的delete为什么无法将属性删除？？
                                 req.session.user = result;
-                                //console.log('登录session:', req.session);
+                                console.log('登录session:', req.session);
                                 res.json(generateResData({msg: "登录成功"}));
                             }
                         });
