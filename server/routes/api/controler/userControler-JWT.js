@@ -2,19 +2,28 @@ import User from './../../../model/user';
 import { generateResData } from './../../../common/utils';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
+import config from './../../../config';
 
 const userControler = {
     signIn(req, res, next){
-        console.log('Authentication', req.get('Authentication'));
         let user = new User(req.body.user);
         let md5 = crypto.createHash("md5");
+        //对密码进行md5加密
         let encryptPassword = md5.update(user.password).digest("hex");
-
+        //查找用户
         User.findOne({username: user.username, password: encryptPassword}).exec()
             .then((result) => {
-                //console.log('result', result);
+                console.log('result', result);
                 if(result){
-
+                    let _tooken = jwt.sign({userId: result._id}, config.cert, {expiresIn: '1h'});
+                    console.log(_tooken);
+                    res.json(generateResData({
+                        msg: "登录成功",
+                        userData: {
+                            username: result.username,
+                        },
+                        tooken: _tooken
+                    }));
                 }else{
                     res.json(generateResData({msg: "无效的用户名或密码"}, 0));
                 }
@@ -52,8 +61,11 @@ const userControler = {
             });
     },
     signOut(req, res, next){
-        
-        return ;
+        return res.json(generateResData({
+            msg: "退出成功",
+            userData: '',
+            tooken: ''
+        }));;
     }
 }
 

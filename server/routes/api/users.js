@@ -2,7 +2,7 @@
 import express from 'express';
 import crypto from 'crypto';
 //import User from './../../model/user';
-import userControler from './controler/userControler';
+import userControler from './controler/userControler-JWT';
 
 let router = express.Router();
 
@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  //console.log(req.body)
+  console.log(req.body)
   if(req.body.operate === 1){
     //登录
     userControler.signIn(req, res, next);

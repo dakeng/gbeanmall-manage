@@ -5,6 +5,7 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from  'body-parser';
 import session from 'express-session';
+import fs from 'fs';
 import db from './db';
 
 const MongoStore = require('connect-mongo')(session);
@@ -17,6 +18,7 @@ const commodity = require('./routes/api/commodity');
 const task = require('./routes/api/task');
 
 const app = express();
+
 
 // view engine setup
 /* app.engine('html', require('express-art-template'));
@@ -32,8 +34,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-/* app.use(session({
+/* 
+app.use(session({
   name: 'user_session',
   secret: 'gbeanmall',
   resave: false,
