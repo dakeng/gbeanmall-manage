@@ -15,14 +15,13 @@ const userControler = {
             .then((result) => {
                 console.log('result', result);
                 if(result){
-                    let _tooken = jwt.sign({userId: result._id}, config.cert, {expiresIn: '1h'});
-                    console.log(_tooken);
+                    let _token = jwt.sign({userId: result._id}, config.cert, {expiresIn: '1d'});
                     res.json(generateResData({
                         msg: "登录成功",
                         userData: {
                             username: result.username,
                         },
-                        tooken: _tooken
+                        token: _token
                     }));
                 }else{
                     res.json(generateResData({msg: "无效的用户名或密码"}, 0));
@@ -64,7 +63,7 @@ const userControler = {
         return res.json(generateResData({
             msg: "退出成功",
             userData: '',
-            tooken: ''
+            token: ''
         }));;
     }
 }

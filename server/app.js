@@ -16,6 +16,7 @@ const index = require('./routes/index');
 const users = require('./routes/api/users');
 const commodity = require('./routes/api/commodity');
 const task = require('./routes/api/task');
+const cart = require('./routes/api/cart');
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use('/', index);
 app.use('/user', users);
 app.use('/commodity', commodity);
 app.use('/task', task);
+app.use('/cart', cart);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
