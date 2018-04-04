@@ -13,7 +13,12 @@
     //返回的数据内容
 }
 ```
-
+所有请求头部均带上
+```
+{
+    x-access-token: token
+}
+```
 ## 登录/注册
 ```
 POST /user
@@ -78,6 +83,17 @@ POST /commodity
         //commodity_price
         //commodity_specification
     }
+}
+```
+## 获取购物车列表
+```
+GET /cart
+```
+## 加入购物车/从购物车删除
+```
+{
+    opreate: 1, //1，加入；2，删除
+    commodity_id: id
 }
 ```
 ## 获取任务列表

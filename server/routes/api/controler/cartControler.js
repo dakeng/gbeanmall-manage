@@ -10,8 +10,8 @@ const cartControler = {
             let commoditys = [];
             if(result){
                 Promise.all(result.commoditys.map((id, index) => {return Commodity.findById(id).exec()}))
-                    .then(commodity => {
-                    commoditys.push(commodity);
+                    .then(result => {
+                    commoditys = result;
                     console.log(commoditys);
                     res.json(generateResData({msg: '获取成功', commoditys: commoditys}));
                 }).catch(error => {
@@ -47,8 +47,8 @@ const cartControler = {
                     }else{
                         let updateCommoditys = [];
                         Promise.all(updateResult.commoditys.map((id, index) => {return Commodity.findById(id).exec()}))
-                            .then(commodity => {
-                                updateCommoditys.push(commodity);
+                            .then(result => {
+                                updateCommoditys = result;
                                 console.log(updateCommoditys);
                                 res.json(generateResData({msg: '加入成功', commoditys: updateCommoditys}));
                         }).catch(error => {
@@ -91,8 +91,8 @@ const cartControler = {
                     }else{
                         let updateCommoditys = [];
                         Promise.all(updateResult.commoditys.map((id, index) => {return Commodity.findById(id).exec()}))
-                            .then(commodity => {
-                                updateCommoditys.push(commodity);
+                            .then(result => {
+                                updateCommoditys = result;
                                 console.log(updateCommoditys);
                                 res.json(generateResData({msg: '移除成功', commoditys: updateCommoditys}));
                         }).catch(error => {
