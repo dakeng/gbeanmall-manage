@@ -17,6 +17,8 @@ const users = require('./routes/api/users');
 const commodity = require('./routes/api/commodity');
 const task = require('./routes/api/task');
 const cart = require('./routes/api/cart');
+const order = require('./routes/api/order');
+const pay = require('./routes/api/pay');
 
 const app = express();
 
@@ -55,6 +57,8 @@ app.use('/user', users);
 app.use('/commodity', commodity);
 app.use('/task', task);
 app.use('/cart', cart);
+app.use('/pay', pay);
+app.use('/order', order);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

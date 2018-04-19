@@ -20,6 +20,7 @@ const userControler = {
                         msg: "登录成功",
                         userData: {
                             username: result.username,
+                            wallet: result.wallet || 0,
                         },
                         token: _token
                     }));
@@ -46,7 +47,7 @@ const userControler = {
                     res.json(generateResData({msg: "用户名已存在"}, 0));
                     return ;
                 }else{
-                    User.create({username: user.username, password: encryptPassword})
+                    User.create({username: user.username, password: encryptPassword, wallet: 30})
                         .then((result) => {
                             res.json(generateResData({msg: '注册成功'}));
                             return ;
