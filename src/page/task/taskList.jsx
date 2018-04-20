@@ -105,7 +105,7 @@ export default class CommodityList extends React.Component {
         request({
             method: 'GET',
         }, (data) => {
-            //console.log(data);
+            console.log(data);
             this.setState({
                 dataSource: data,
                 loading: false
@@ -118,7 +118,7 @@ export default class CommodityList extends React.Component {
     }
 
     render (){
-        //console.log(this.state.dataSource);
+        console.log(this.state.dataSource);
         return (
             <div className="content-container">
                 <h2>任务管理</h2>

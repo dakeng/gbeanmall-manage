@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
             res.json(generateResData(err, 0));
             next(err);
         }else{
-            res.json(generateResData(tasks));
+            res.json(generateResData({msg: '获取成功', data: tasks}));
         }
     })
 });

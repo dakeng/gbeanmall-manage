@@ -16,8 +16,8 @@ let requestAddCommodity = function(data, callback){
                 throw new Error('Bad response from server');
             }else{
                 response.json().then(data => {
-                    console.log(data);
-                    callback(data.data);
+                    //console.log(data);
+                    callback && callback(data.data.data);
                 })
             }
         }).catch(err => {
