@@ -104,7 +104,6 @@ GET /task
 ```
 POST /task
 {
-    task_id: String,//任务id
     task_name: String,//任务名称
     task_reward: Number,//任务奖励
     task_des: String,//任务描述

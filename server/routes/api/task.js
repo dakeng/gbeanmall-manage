@@ -21,15 +21,33 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next){
     console.log(req.body);
-    Task.create(req.body.data, (err, docs) => {
-        if(err){
-            res.json(generateResData(err, 0));
-            next(err);
-        }else{
-            console.log('成功');
-            res.json(generateResData({msg: '成功', data: docs}));
-        }
-    });
+    switch(req.body.operate){
+        case 1: 
+        //创建任务
+            Task.create(req.body.data, (err, docs) => {
+                if(err){
+                    res.json(generateResData(err, 0));
+                    next(err);
+                }else{
+                    console.log('成功');
+                    res.json(generateResData({msg: '成功', data: docs}));
+                }
+            });
+            break;
+        case 2: 
+            //删除任务
+            Task.find().remove({_id: req.body.data._id}, (err, docs) => {
+                if(err){
+                    res.json(generateResData(err, 0));
+                    next(err);
+                }else{
+                    res.json(generateResData({msg: '已删除', data: []}));
+                }
+            })
+            break;
+        default:
+            res.json(generateResData({msg: '传入数据有误'}, 0))
+    }
 })
 
 //export {router};

@@ -9,6 +9,7 @@ let taskSchema = mongoose.Schema({
     task_name: String,//任务名称
     task_reward: Number,//任务奖励
     task_des: String,//任务描述
+    task_screen: String,//任务跳转页面
 });
 
 let Task = mongoose.model('Task', taskSchema);
